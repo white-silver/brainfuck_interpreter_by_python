@@ -1,13 +1,12 @@
 import sys
-
-# + : increment the memory's data
-# - : decrement the memory's data
-# [ : goto ']' if the memory is null(0)
-# ] : goto '[' if the memory is not null
-# . : output from the memory
-# , : input to the memory
-# > : increment memory position
-# < : decrement memory position
+# '>'   increment the pointer.
+# '<'   decrement the pointer.
+# '+'	increment the value at the pointer.
+# '-'	decrement the value at the pointer.
+# '.'	output the value at the  pointer as utf-8 character.
+# ','	accept one byte of input, storing its value in the mem at the  pointer.
+# '['	if the byte at the pointer is zero, then jump it to the matching ']'
+# ']'   if the byte at the pointer is nonzero, then jump it buck to the matching '['
 mem_size = 30000
 mem = [0 for i in range(mem_size)]
 ptr = 0
