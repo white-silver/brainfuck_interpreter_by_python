@@ -17,10 +17,8 @@ if __name__ == "__main__":
     with open(path) as f:
         code = f.read()
     code_list = list(code)
-    for i in range(code_list.count('\n')):
-        code_list.remove('\n')
 
-    head = 0 #reading program tape like a turing machine
+    head = 0 #(tape reading) head
     while head < len(code_list):
         if code_list[head] == '+':
             mem[ptr] += 1
@@ -29,7 +27,6 @@ if __name__ == "__main__":
             mem[ptr] -= 1
 
         elif code_list[head] == '[':
-            #if pointer -> 0, break loop, jump to ]
             if mem[ptr] == 0:
                 count = 1
                 while count != 0:
@@ -42,7 +39,6 @@ if __name__ == "__main__":
                     elif code_list[head] == ']':
                         count -= 1
         elif code_list[head] == ']':
-            #if pointer -x-> 0, jump to [
             if mem[ptr] != 0:
                 count = 1
                 while count != 0:
@@ -68,5 +64,7 @@ if __name__ == "__main__":
             if ptr == 0:
                 print("Can't decrement anymore")
             ptr -= 1
+        else:
+            pass #ignore other symbol
 
         head += 1    
