@@ -7,17 +7,10 @@ import sys
 # ','	accept one byte of input, storing its value in the mem at the  pointer.
 # '['	if the byte at the pointer is zero, then jump it to the matching ']'
 # ']'   if the byte at the pointer is nonzero, then jump it buck to the matching '['
-mem_size = 30000
-mem = [0 for i in range(mem_size)]
-ptr = 0
-
-if __name__ == "__main__":
-    args = sys.argv
-    path = args[1]
-    with open(path) as f:
-        code = f.read()
-    code_list = list(code)
-
+def interpret(code):
+    mem_size = 30000
+    mem = [0 for i in range(mem_size)]
+    ptr = 0
     head = 0 #(tape reading) head
     while head < len(code_list):
         if code_list[head] == '+':
@@ -60,11 +53,25 @@ if __name__ == "__main__":
             if ptr > mem_size:
                 print("overflow!")
                 sys.exit(1)
-        elif code_list[head] == "<":
+        elif code_list[head] == '<':
             if ptr == 0:
                 print("Can't decrement anymore")
             ptr -= 1
         else:
-            pass #ignore other symbol
+            pass #ignore other symbols
 
-        head += 1    
+        head += 1   
+if __name__ == "__main__":
+    args = sys.argv
+    path = args[1]
+    if len(args) > 2:
+        altbf_table = args[2] #for alternative brainfuck codes
+        with open(path) as f:
+        commands = f.readlines()
+        commands = [i.strip('\n') for i in commands]
+        commands_dict = trans_to_bf(commands)
+    else:    
+        with open(path) as f:
+            code = f.read()
+        code_list = list(code) 
+        interpret(code)
