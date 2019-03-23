@@ -23,5 +23,3 @@ if __name__ == "__main__":
         for i in op:
             code = code.replace(commands_dict[i],i)
         bf.interpret(code)
-
-        
