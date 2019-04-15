@@ -44,10 +44,14 @@ def interpret(code_list):
                         count -= 1
         elif code_list[head] == '.':
             #chr: char -> code point
-            print(chr(mem[ptr]),end = "") #no line break
+            print(chr(mem[ptr]),end = "",flush=True) #no line break
         elif code_list[head] == ',':
             #ord: code point -> char
-            mem[ptr] = ord(sys.stdin.buffer.read(1))
+            c = sys.stdin.buffer.read(1)
+            if len(c) == 0:
+                sys.exit(1)
+            else:    
+                mem[ptr] = ord(c)
         elif code_list[head] == '>':
             ptr += 1       
             if ptr > mem_size:
@@ -56,6 +60,7 @@ def interpret(code_list):
         elif code_list[head] == '<':
             if ptr == 0:
                 print("Can't decrement anymore")
+                sys.exit(1)
             ptr -= 1
         else:
             pass #ignore other symbols
