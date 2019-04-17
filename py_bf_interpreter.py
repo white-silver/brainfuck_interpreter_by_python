@@ -13,8 +13,8 @@ if __name__ == "__main__":
         with open(path) as f:
             code = f.read()
 
-        altbf_path = args[2] #for alternative brainfuck codes
-        with open(altbf_path) as f:
+        bf_der_path = args[2] #for brainfuck derivative codes
+        with open(bf_der_path) as f:
             commands = f.readlines()
         commands = [i.strip('\n') for i in commands]
         commands_dict = bf.make_trans_dict(commands)
